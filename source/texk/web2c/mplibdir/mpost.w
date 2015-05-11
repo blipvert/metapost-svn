@@ -1,5 +1,3 @@
-% $Id$
-%
 % This file is part of MetaPost;
 % the MetaPost program is in the public domain.
 % See the <Show version...> code below for more info.
@@ -1027,7 +1025,8 @@ fprintf(stdout,
 "For more information about these matters, see the file\n"
 "COPYING.LESSER or <http://gnu.org/licenses/lgpl.html>.\n"
 "Original author of MetaPost: John Hobby.\n"
-"Author of the CWEB MetaPost: Taco Hoekwater.\n\n"
+"Author of the CWEB MetaPost: Taco Hoekwater.\n"
+"Current maintainer of MetaPost: Luigi Scarso.\n\n"
 );
   mpost_xfree(s);
   if (!dvitomp_only) {
@@ -1283,12 +1282,15 @@ if (options->job_name != NULL) {
 }
 options->job_name = job_name;
 
-@ For W32\TeX we can |#define DLLPROC dllmpostmain| in order to build \MP\
-as DLL.
+@ We |#define DLLPROC dllmpostmain| in order to build \MP\ as DLL for
+W32\TeX.
 
 @<Declarations@>=
+#define DLLPROC dllmpostmain
 #if defined(WIN32) && !defined(__MINGW32__) && defined(DLLPROC)
 extern __declspec(dllexport) int DLLPROC (int argc, char **argv);
+#else
+#undef DLLPROC
 #endif
 
 @ Now this is really it: \MP\ starts and ends here.
@@ -1306,7 +1308,7 @@ static char *cleaned_invocation_name(char *arg)
     return ret;
 }
 int
-#if defined(WIN32) && !defined(__MINGW32__) && defined(DLLPROC)
+#if defined(DLLPROC)
 DLLPROC (int argc, char **argv)
 #else
 main (int argc, char **argv)
@@ -1376,13 +1378,15 @@ main (int argc, char **argv)
   if (mp==NULL)
 	exit(EXIT_FAILURE);
   history = mp_status(mp);
-  if (history!=0)
+  if (history!=0 && history!=mp_warning_issued)
 	exit(history);
   if (set_list!=NULL) {
     run_set_list(mp);
   }
   history = mp_run(mp);
   (void)mp_finish(mp);
-  exit(history);
+  if (history!=0 && history!=mp_warning_issued)
+	exit(history);
+  else
+     exit(0);
 }
-

@@ -1,4 +1,3 @@
-% $Id$
 % This file is part of MetaPost;
 % the MetaPost program is in the public domain.
 % See the <Show version...> code in mpost.w for more info.
@@ -704,7 +703,7 @@ TODO: dynamic reallocation
 that were noticed.
 
 @d bad_dvi(A)       mpx_abort(mpx,"Bad DVI file: " A "!")
-@d bad_dvi_two(A,B) mpx_abort(mpx,"Bad DVI file: %s !", A, B)
+@d bad_dvi_two(A,B) mpx_abort(mpx,"Bad DVI file: " A "!", B)
 @.Bad DVI file@>
 
 @* The character set.
@@ -2751,9 +2750,9 @@ used anyway - thus just skip the value,
 @c 
 static float mpx_get_float_map(MPX mpx, char *s) {
     if (s != NULL) {
-	while (isspace(*s))
+	while (isspace((unsigned char)*s))
 	    s++;
-	while (!isspace(*s) && *s)
+	while (!isspace((unsigned char)*s) && *s)
 	    s++;
     }
     mpx->arg_tail = s;
@@ -3989,7 +3988,7 @@ static int do_spawn (MPX mpx, char *icmd, char **options) {
     }  
   }
 #else
-  retcode = spawnvp(_P_WAIT, cmd, (const char* const*)options);
+  retcode = _spawnvp(_P_WAIT, cmd, (const char* const*)options);
 #endif
   xfree(cmd);
   return retcode;

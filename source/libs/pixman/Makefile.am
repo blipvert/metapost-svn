@@ -1,14 +1,13 @@
 ## Proxy Makefile.am to build pixman for TeX Live.
 ##
-##   Copyright (C) 2012, 2013 Taco Hoekwater <taco@metatex.org>
+##   Copyright (C) 2012 Taco Hoekwater <taco@metatex.org>
+##   Copyright (C) 2012-2015 Peter Breitenlohner <tex-live@tug.org>
 ##
 ##   This file is free software; the copyright holder
 ##   gives unlimited permission to copy and/or distribute it,
 ##   with or without modifications, as long as this notice is preserved.
 ##
-ACLOCAL_AMFLAGS = -I ../../m4
-
-## We want to re-distribute the whole original pixman source tree.
+## We want to re-distribute the whole pixman source tree.
 ##
 EXTRA_DIST = $(PIXMAN_TREE)
 
@@ -18,14 +17,14 @@ EXTRA_DIST += $(PIXMAN_TREE)-PATCHES
 
 PIXMAN_SRC = $(PIXMAN_TREE)/pixman
 
-# in case of an SVN repository
-dist-hook:
-	rm -rf `find $(distdir) -name .svn -o -name .deps -o -name .dirstamp -o -name '*.$(OBJEXT)'`
-	rm -f $(distdir)/$(PIXMAN_SRC)/pixman-version.h
+# Files not to be distributed
+include $(srcdir)/../../am/dist_hook.am
+NEVER_NAMES += $(NEVER_NAMES_SUB)
 
 SUBDIRS = . include
 
 AM_CPPFLAGS = -I$(top_srcdir)/$(PIXMAN_SRC)
+AM_CFLAGS = $(VISIBILITY_CFLAGS) # $(WARNING_CFLAGS)
 
 noinst_LIBRARIES = libpixman.a
 

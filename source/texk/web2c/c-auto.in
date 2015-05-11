@@ -153,9 +153,6 @@
 /* Define to 1 if you have the <stdlib.h> header file. */
 #undef HAVE_STDLIB_H
 
-/* Define to 1 if you have the `strcasecmp' function. */
-#undef HAVE_STRCASECMP
-
 /* Define to 1 if you have the `strchr' function. */
 #undef HAVE_STRCHR
 
@@ -180,11 +177,8 @@
 /* Define to 1 if you have the `strrchr' function. */
 #undef HAVE_STRRCHR
 
-/* Define to 1 if you have the `strstr' function. */
-#undef HAVE_STRSTR
-
-/* Define to 1 if you have the `strtol' function. */
-#undef HAVE_STRTOL
+/* Define to 1 if you have the <StructTreeRoot.h> header file. */
+#undef HAVE_STRUCTTREEROOT_H
 
 /* Define to 1 if `st_mtim' is a member of `struct stat'. */
 #undef HAVE_STRUCT_STAT_ST_MTIM
@@ -230,15 +224,11 @@
 /* tex: Define to enable --ipc. */
 #undef IPC
 
-/* Define to the sub-directory in which libtool stores uninstalled libraries.
-   */
+/* Define to the sub-directory where libtool stores uninstalled libraries. */
 #undef LT_OBJDIR
 
 /* metafont: Define to include mftalk (generic server) window support. */
 #undef MFTALKWIN
-
-/* Define to 1 if building binaries for TeX Live, else 0. */
-#undef NATIVE_TEXLIVE_BUILD
 
 /* metafont: Define to include NeXT window support. */
 #undef NEXTWIN

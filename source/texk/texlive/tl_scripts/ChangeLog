@@ -1,3 +1,76 @@
+2015-04-27  Karl Berry  <karl@tug.org>
+
+	* Makefile.am (xmans): new phony target.
+
+2015-04-20  Peter Breitenlohner  <peb@mppmu.mpg.de>
+
+	* Makefile.am: Remove fmtutil-sys.sh and updmap-sys.sh, they are
+	maintained under Master and now handled via linked_scripts.
+
+2015-04-19  Karl Berry  <karl@tug.org>
+
+	* texlinks.sh (install_link): use $exeext for pdfcsplain too,
+	for Cygwin.  From Ken Brown.	
+
+2015-04-12  Norbert Preining  <norbert@preining.info>
+
+	* Makefile.am: remove fmtutil.sh, it is now handled via
+	linked_scripts and fmtutil.pl
+
+2014-11-20  Karl Berry  <karl@tug.org>
+
+	* fmtutil.sh: (init_log_warnings, log_warning): remove.
+	(main): change log_warning calls to log_failure.
+	(flush_msg_buffers, byebye): no warnings any more.
+
+	* fmtutil-sys.sh: doc fixes.
+
+	* updmap-sys.sh: prepend directory of executable to $PATH.
+	
+2014-11-17  Karl Berry  <karl@tug.org>
+
+	* fmtutil.sh: install (modified) patch from Zephyrus C,
+	29 May 2014 00:15:15,
+	http://tug.org/pipermail/tex-live/2014-May/035443.html.
+	(setupTmpDir): call byebye instead of cleanup, to display msgs.
+	(byebye): exit 1 if warnings, not just errors.
+	(verbose): do not assume && ... || precedence.
+	(main): set setupTmpDir (and trap in general) earlier.
+	(run_initex): check for mv and cp failure, e.g., full file system.
+
+2014-07-28  Peter Breitenlohner  <peb@mppmu.mpg.de>
+
+	* Makefile.am (run-texlinks): Install the required files.
+
+2014-07-27  Karl Berry  <karl@tug.org>
+
+	* Makefile.am (texlinks_prog): separate out from $(run_texlinks).
+
+2014-07-17  Karl Berry  <karl@tug.org>
+
+	* tcfmgr,
+	* fmtutil.sh,
+	* fmtutil-sys.sh:
+	* texconfig.1: prepend directory of executable to $PATH.
+
+2014-07-13  Karl Berry  <karl@tug.org>
+
+	* texconfig.sh,
+	* texconfig-sys.sh,
+	* texconfig-dialog.sh,
+	* texconfig.1: prepend directory of executable to $PATH.
+	(Testing with texconfig before propagating to updmap and fmtutil.)
+
+2014-05-09  Karl Berry  <karl@tug.org>
+
+	* texlinks.sh (install_link): force destination for
+	pdfcsplain to be pdftex.
+
+2014-04-21  Norbert Preining  <preining@logic.at>
+
+	* fmtutil.sh: new option --no-error-if-no-engine,
+	for the sake of luajittex, not available on all platforms.
+
 2013-07-31  Norbert Preining  <preining@logic.at>
 
 	* updmap-sys.sh: call updmap --sys  instead of epanding vars

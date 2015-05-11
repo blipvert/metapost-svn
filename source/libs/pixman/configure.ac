@@ -1,6 +1,6 @@
 dnl Process this file with autoconf to produce a configure script.
 dnl
-dnl   Copyright (C) 2012, 2013 Peter Breitenlohner <tex-live@tug.org>
+dnl   Copyright (C) 2012-2014 Peter Breitenlohner <tex-live@tug.org>
 dnl
 dnl   This file is free software; the copyright holder
 dnl   gives unlimited permission to copy and/or distribute it,
@@ -28,6 +28,8 @@ AC_PROG_LN_S
 AC_CHECK_FUNCS([getisax])
 AC_C_BIGENDIAN
 AC_C_INLINE
+
+KPSE_COMPILER_VISIBILITY
 
 AC_CONFIG_HEADERS([config.h])
 
@@ -96,10 +98,7 @@ AC_DEFUN([PIXMAN_LINK_WITH_ENV],[dnl
 	LIBS="$save_LIBS"
 ])
 
-dnl Define SIZE_MAX if necessary, e.g., for Solaris 9.
-AC_CHECK_DECL([SIZE_MAX], ,
-              [AC_DEFINE([SIZE_MAX], [((size_t)-1)],
-                         [Define to `((size_t)-1)' if <stdint.h> does not define it.])])
+KPSE_CHECK_SIZE_MAX
 
 dnl Find a -Werror for catching warnings.
 WERROR=
